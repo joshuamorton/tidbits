@@ -38,7 +38,7 @@ for examples, or "quit" to return to vanilla python.
     [ begin a loop
     ] end a loop
                 """)
-        elif ">" in myinput:
+        elif ">" in myinput or "<" in myinput or "[" in myinput or "," in myinput or "." in myinput or "+" in myinput or "-" in myinput:
             compiler(myinput)
         elif myinput == "examples":
             print("""Pick a piece of example code, here are some options.  Type the name in terminal to see it:
@@ -106,6 +106,8 @@ def plusSign(contentList, character, position, memory, memoryPosition, loopCount
 
 def minusSign(contentList, character, position, memory, memoryPosition, loopCount, loopPosition):
     """"""
+    if memoryPosition >= len(memory):
+        memory.append(0)
     if memory[memoryPosition] == 0:
         print("\n You are attempting to subtract from 0 at character number {0} in your code".format(position+1))
         contentList = [""]
@@ -117,8 +119,12 @@ def minusSign(contentList, character, position, memory, memoryPosition, loopCoun
 
 def period(contentList, character, position, memory, memoryPosition, loopCount, loopPosition):
     """"""
-    print(chr(memory[memoryPosition]), end = "")
-    #print(memory[memoryPosition])
+    if memoryPosition >= len(memory):
+        print("You are trying to print at a nonexistent position in memory at character {} in your code".format(position+1))
+        memory.append(0)
+    else:
+        print(chr(memory[memoryPosition]), end = "")
+        #print(memory[memoryPosition])
     position += 1
     return (contentList, character, position, memory, memoryPosition, loopCount, loopPosition)
 
