@@ -14,19 +14,47 @@
 
 def interpreter():
     """"""
-    print("""
-        This is the interpreted mode for this command line brainfuck compiler.  
-        In case you are unaware, these are the brainfuck commands:
-        > increment the data pointer
-        < decrement the data pointer
-        + increment the byte at the current position
-        - decrement the byte at the current position
-        . output the contents of the current position
-        , take a user input and store it to the current byte
-        [ begin a loop
-        ] end a loop
-        """)
-
+    print("""Welcome to Brainfuck, this compiler will eventually do some cool things, 
+but for now this is just a shell that does not save anything between runs.  
+Type help for syntax information, quit to exit and return to python, or 
+code to run it.  This is a work in progress. Type "help" for help, "examples" 
+for examples, or "quit" to return to vanilla python.
+\nJosh Morton """)
+    myActive = True
+    while myActive == True:
+        myinput = input("!?:::")
+        if myinput == "quit" or myinput == "q" or myinput == "Quit" or myinput == "QUIT" or myinput == "exit" or myinput == "Exit" or myinput == "EXIT":
+            myActive = False
+        elif myinput == "help" or myinput == "h" or myinput == "Help" or myinput == "HELP":
+            print(
+    """ This is the interpreted mode for this command line brainfuck compiler.  
+    In case you are unaware, these are the brainfuck commands:
+    > increment the data pointer
+    < decrement the data pointer
+    + increment the byte at the current position
+    - decrement the byte at the current position
+    . output the contents of the current position
+    , take a user input and store it to the current byte
+    [ begin a loop
+    ] end a loop
+                """)
+        elif ">" in myinput:
+            compiler(myinput)
+        elif myinput == "examples":
+            print("""Pick a piece of example code, here are some options.  Type the name in terminal to see it:
+    "Hello World"
+    "Fibonacci"
+    "Adder"
+                """)
+        elif myinput == "Hello World":
+            print("""++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.""")
+            compiler("""++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.""")
+        elif myinput == "Fibonacci":
+            print("+.>+.>>>+++++ +++++[<<<[->>+<<]>>[-<+<+>>]<<<[->+<]>>[-<<+>>]<.>>>-]")
+            compiler("+.>+.>>>+++++ +++++[<<<[->>+<<]>>[-<+<+>>]<<<[->+<]>>[-<<+>>]<.>>>-]")
+        elif myinput == "Adder":
+            print(",>,<[>+<-]>.")
+            compiler(",>,<[>+<-]>.")
 
 charList = [">", "<", "+", "-", ".", ",", "[","]"]
 
@@ -90,11 +118,14 @@ def minusSign(contentList, character, position, memory, memoryPosition, loopCoun
 def period(contentList, character, position, memory, memoryPosition, loopCount, loopPosition):
     """"""
     print(chr(memory[memoryPosition]), end = "")
+    #print(memory[memoryPosition])
     position += 1
     return (contentList, character, position, memory, memoryPosition, loopCount, loopPosition)
 
 def comma(contentList, character, position, memory, memoryPosition, loopCount, loopPosition):
     """"""
+    if memoryPosition >= len(memory):
+        memory.append(0)
     memory[memoryPosition] = int(input("Input an integer value: "))
     position += 1
     return (contentList, character, position, memory, memoryPosition, loopCount, loopPosition)
