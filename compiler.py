@@ -52,7 +52,6 @@ for examples, or "quit" to return to vanilla python.
     , take a user input and store it to the current byte
     [ begin a loop
     ] end a loop
-<<<<<<< HEAD
     Memory is not conserved between actions, 
     type "help X" for more information regarding a specific character (function)""")
         elif myinput == "help >":
@@ -77,10 +76,6 @@ for examples, or "quit" to return to vanilla python.
         elif myinput == "help ]":
             print("""ends a loop.  See 'help [' for more detailed information.""")
         elif ">" in myinput or "[" in myinput or "," in myinput or "+" in myinput:
-=======
-                """)
-        elif ">" in myinput or "<" in myinput or "[" in myinput or "," in myinput or "." in myinput or "+" in myinput or "-" in myinput:
->>>>>>> 79acabfbcc4b93888129cde18544e3b400b0f45d
             compiler(myinput)
         elif myinput == "examples":
             print("""Pick a piece of example code, here are some options.  Type the name in terminal to see it:
@@ -165,14 +160,10 @@ def plusSign(contentList, character, position, memory, memoryPosition, loopCount
 
 
 def minusSign(contentList, character, position, memory, memoryPosition, loopCount, loopPosition):
-<<<<<<< HEAD
     """Decrements the value at the current position, again there is a homemmade error message"""
 
     #todo: nothing
 
-=======
-    """"""
->>>>>>> 79acabfbcc4b93888129cde18544e3b400b0f45d
     if memoryPosition >= len(memory):
         memory.append(0)
     if memory[memoryPosition] == 0:
@@ -186,7 +177,6 @@ def minusSign(contentList, character, position, memory, memoryPosition, loopCoun
 
 
 def period(contentList, character, position, memory, memoryPosition, loopCount, loopPosition):
-<<<<<<< HEAD
     """will print the value at the current position in memory, ascii encoded because that's how BF works, the 
     commented out portion is for code that, for example, prints Fibonacci numbers.  If the numbers are ascii
     encoded, you end up with weird results"""
@@ -198,15 +188,6 @@ def period(contentList, character, position, memory, memoryPosition, loopCount, 
         memory.append(0)
     print(chr(memory[memoryPosition]), end="")
     #print(memory[memoryPosition])
-=======
-    """"""
-    if memoryPosition >= len(memory):
-        print("You are trying to print at a nonexistent position in memory at character {} in your code".format(position+1))
-        memory.append(0)
-    else:
-        print(chr(memory[memoryPosition]), end = "")
-        #print(memory[memoryPosition])
->>>>>>> 79acabfbcc4b93888129cde18544e3b400b0f45d
     position += 1
     return (contentList, character, position, memory, memoryPosition, loopCount, loopPosition)
 
