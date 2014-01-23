@@ -100,3 +100,79 @@ while(y + tileSize < grid.length) { //O(n)
 }
 
 //all in all I wrote these between 1:30 and 2:55 this morning.
+
+//sixth iteration
+//adding a single change for staricase type situations
+//hopefully this will be quick and easy, probably not though.
+
+var grid = this.getNavGrid().grid;
+var tileSize = 4;
+var y = 0;
+var rects = this.spawnedRectangles;
+while(y + tileSize < grid.length) {
+    var x = 0;
+    while(x + tileSize < grid[0].length) {
+        var occupied = grid[y][x].length > 0;
+        if(!occupied) {
+            this.addRect(x + tileSize / 2, y + tileSize / 2, tileSize, tileSize);
+        }
+        x += tileSize;
+    }
+    y += tileSize;
+    //start with this
+}
+rects = this.spawnedRectangles;
+
+function mergeBlocks(that,firstRect,secondRect) {
+    if(firstRect.pos.x == secondRect.pos.x) { //the two blocks are stacked
+        centerX = firstRect.pos.x;
+        centerY = ( (firstRect.height * firstRect.pos.y) + (secondRect.height * secondRect.pos.y) ) / (firstRect.height + secondRect.height);
+        width = firstRect.width;
+        height = firstRect.height + secondRect.height;
+        that.addRect(centerX, centerY, width, height);
+        that.removeRectAt(firstRect.pos.x, firstRect.pos.y);
+        that.removeRectAt(secondRect.pos.x, secondRect.pox.y);
+    }else if(firstRect.pos.y == secondRect.pos.y) { //the two block are next to each other
+        centerY = firstRect.pos.y;
+        centerX = ( (firstRect.width * firstRect.pos.x) + (secondRect.width * secondRect.pos.x) ) / (firstRect.width + secondRect.width);
+        height = firstRect.height;
+        width = firstRect.width + secondRect.width;
+        that.addRect(centerX, centerY, width, height);
+        that.removeRectAt(firstRect.pos.x, firstRect.pos.y);
+        that.removeRectAt(secondRect.pos.x, secondRect.pox.y);
+    }
+    rects = this.spawnedRectangles;
+}
+
+function rectExist(that,x,y) {
+    var retval = false;
+    var i = 0;
+    while(i < rects.length) {
+        var rect = rects[i];
+        if( (x <= rect.pos.x + rect.width / 2 && x >= rect.pos.x - rect.width / 2) && (y <= rect.pos.y + rect.height / 2 && y >= rect.pos.y - rect.height / 2)) {
+            retval = true;
+            i = rect.length;
+        }
+        i += 1;
+    }
+    return retval;
+}
+
+var y = 0;
+while(y + tileSize < grid.length) {
+    var x = 0;
+    while(x + tileSize < grid[0].length) {
+        var occupied = grid[y][x].length > 0;
+        var next = grid[y][x+tileSize].length >0;
+        if(!occupied) {
+            if(!next) {
+
+            }else{
+            this.addRect(x + tileSize / 2, y + tileSize / 2, tileSize, tileSize);
+            this.wait();  // Hover over the timeline to help debug!
+            }
+        }
+        x += tileSize;
+    }
+    y += tileSize;
+}
