@@ -1,6 +1,4 @@
-from __future__ import print_function
 import json
-import imp
 import sys
 import re
 
@@ -89,11 +87,5 @@ factorial : (define fact (lambda (x) (if (= x 1) 1 (* x (fact (- x 1))))))
 power : (define pow (lambda (number power) (if (= power 1) number ( * number (pow number (- power 1))))))
 not equals : (define != (lambda (a b) (if (= a b) False True)))
 import arbitrary builtin modules: (define import (lambda (module) (define module (do __import__ module)))) //then you can do (import math) and math will be
-    //actually this doesn't quite work
-to import a module, you can use this:
-    (define MODULE (do __import__ (str MODULE)))
-    //where MODULE is the module name
-then to access stuff within the module:
-    (define ATTR (do getattr MODULE (str ATTR)))
-    //where MODULE is the module name and ATTR is the attribute
+(define attr (lambda (module attr) (define attr (do getattr module attr))))
 """
