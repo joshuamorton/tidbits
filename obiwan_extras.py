@@ -120,7 +120,8 @@ class checked_list(list):
 
 x = inline({(float, type): ([int], [float], [(int, str)], {int})}) >> {(3.0, str): ([1, 2, 3], [4.0, 5.0, 6.0], [(3, "3"), (4, "4")], {1, 2, 3})}
 # y = inline({(float, type): ([int], [float], [(int, str)])}) >> {(3.0, str): ([1, 2, 3], [4.0, 5.0, 6.0], [(3, "3"), (4, "4")], {1, 2, 3})} # throws an error
-myList = inline([int]) >> [1, 2, 3, 4, 5]  # how it ends up looking, and since inline is just a class, this could easily be "myList = typed([int]) >> [1,2,3,4,5,6]" or whatever
+myList = inline([int]) >> [1, 2, 3, 4, 5]  
+# how it ends up looking, and since inline is just a class, this could easily be "myList = typed([int]) >> [1,2,3,4,5,6]" or whatever
 
 print(x)
 print(myList)
